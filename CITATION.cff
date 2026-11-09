@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use TinyDiffusion, cite the versioned release and the run configuration."
+title: "TinyDiffusion"
+type: software
+authors:
+  - name: TinyDiffusion
+license: MIT
+version: 0.1.0

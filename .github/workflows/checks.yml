@@ -1,0 +1,17 @@
+name: Checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: python train.py --epochs 2 --batch_size 8 --hidden_dim 16 --depth 1 --time_dim 8 --timesteps 8
+      - run: python sample.py --n_samples 32 --hidden_dim 16 --depth 1 --time_dim 8 --timesteps 8
+      - run: python evaluate.py --checkpoint model.pt --n_samples 64 --repeats 2 --output_dir evaluation
